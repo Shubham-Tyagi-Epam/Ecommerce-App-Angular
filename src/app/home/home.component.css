@@ -1,0 +1,44 @@
+.carousel-img{
+    height :32rem;
+    width:100%;
+}
+
+.category-img{
+    opacity: 1;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.category-img:hover{
+    transform: scale(1.1);
+    opacity: 0.2;
+    z-index: 50;
+}
+
+.category-img-text{
+    position: absolute;
+    transition: 0.1s;
+    opacity: 0;
+    font-size: 4rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: rgb(0, 0, 0);
+    pointer-events: none;
+    z-index: 100;
+    border: 2px solid black;
+    padding: 0rem 0.5rem;
+    border-radius: 20px;
+}
+
+.category-img:hover ~ .category-img-text{
+    opacity: 1;
+    text-align: center;
+    /* font-size: larger; */
+    
+}
+
+.shubhrousel{
+    position: relative;
+    padding-top: 35px;
+}

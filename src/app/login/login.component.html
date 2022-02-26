@@ -1,0 +1,50 @@
+<div class="login-bg p-5 d-flex align-items-center">
+    <div class="card about-us-card mx-auto ">
+    <div class="row justify-content-around">
+      
+      <div class="offset-lg-1 col-lg-4 col-md-6 p-5 d-flex align-items-center">
+         
+        <div class="card-body rounded" style="box-shadow: rgb(77, 67, 67) 0px 3px 8px;">
+            <h3>Login</h3>
+            Dont have an account yet ? <a routerLink="/register" class="link-primary"> Sign Up</a>
+            <form class="" [formGroup]="loginFormReactive">
+              <div class="form-group">
+                  <label for="uidReactive"> User Id </label>
+                  <input type="text" id="uidReactive" class="form-control" formControlName="uidReactive">
+                  <div *ngIf="uidReactive?.invalid && (uidReactive?.dirty || uidReactive?.touched)">
+                      <div *ngIf="uidReactive?.errors?.['required']">
+                          <p class="text-danger"> User Id is required</p>
+                      </div>
+                      <div *ngIf="uidReactive?.errors?.['minlength']">
+                          <p class="text-danger"> User Id must have atleast 4 chars</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="pwdReactive"> Password </label>
+                  <input type="password" id="pwdReactive" name="pwd" class="form-control" formControlName="pwdReactive">
+                  <div *ngIf="pwdReactive?.invalid && (pwdReactive?.dirty || pwdReactive?.touched)">
+                      <div *ngIf="pwdReactive?.errors?.['required']">
+                          <p class="text-danger"> Password is required</p>
+                      </div>
+                      <div *ngIf="pwdReactive?.errors?.['minlength']">
+                          <p class="text-danger"> Password must have atleast 4 chars</p>
+                      </div>
+                      <div *ngIf="pwdReactive?.errors?.['invalidPwd']">
+                          <p class="text-danger"> Password must starts with the word admin</p>
+                      </div>
+                  </div>
+              </div>
+              
+              <button type="button" class="btn btn-dark mt-4" (click)="login()">LOGIN</button>
+              </form>
+        </div>
+      </div>
+      <div class="col-lg-7 col-md-6 d-flex flex-column justify-content-center p-5">
+        <div class="">
+          <img src="../../assets/Images/login.svg" class="img-fluid rounded-start" alt="...">
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

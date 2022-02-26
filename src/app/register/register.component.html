@@ -1,0 +1,89 @@
+<div class="login-bg p-5 d-flex align-items-center">
+    <div class="card about-us-card mx-auto ">
+    <div class="row justify-content-around">
+      
+      <div class="offset-lg-1 col-lg-5 col-md-6 p-5 d-flex align-items-center">
+         
+        <div class="card-body rounded" style="box-shadow: rgb(77, 67, 67) 0px 3px 8px;">
+            <h3 class="font-weight-bold">Register</h3>
+            Already have an account ? <a routerLink='/login' class="link-primary"> Login </a>
+            <form class="" [formGroup]="registerFormReactive">
+              <div class="form-group">
+                  <label for="uidReactive"> User Id </label>
+                  <input type="text" id="uidReactive" class="form-control" formControlName="uidReactive">
+                  <div *ngIf="uidReactive?.invalid && (uidReactive?.dirty || uidReactive?.touched)">
+                      <div *ngIf="uidReactive?.errors?.['required']">
+                          <p class="text-danger"> User Id is required</p>
+                      </div>
+                      <div *ngIf="uidReactive?.errors?.['minlength']">
+                          <p class="text-danger"> User Id must have atleast 4 chars</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="nameReactive"> Name </label>
+                  <input type="text" id="nameReactive" class="form-control" formControlName="nameReactive">
+                  <div *ngIf="nameReactive?.invalid && (nameReactive?.dirty || nameReactive?.touched)">
+                      <div *ngIf="nameReactive?.errors?.['required']">
+                          <p class="text-danger"> name is required</p>
+                      </div>
+                      <div *ngIf="nameReactive?.errors?.['minlength']">
+                          <p class="text-danger"> name must be of atleast 3 chars</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="emailReactive"> Email </label>
+                  <input type="text" id="emailReactive" name="email" class="form-control" formControlName="emailReactive">
+                  <div *ngIf="emailReactive?.invalid && (emailReactive?.dirty || emailReactive?.touched)">
+                      <div *ngIf="emailReactive?.errors?.['required']">
+                          <p class="text-danger"> Email is required</p>
+                      </div>
+                      <div *ngIf="emailReactive?.errors?.['minlength']">
+                          <p class="text-danger"> Email must have atleast 7 chars</p>
+                      </div>
+                      <div *ngIf="emailReactive?.errors?.['invalidEmail']">
+                          <p class="text-danger">Email must end with .com</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="locationReactive">Location</label>
+                  <input type="text" id="locationReactive" class="form-control" formControlName="locationReactive">
+                  <div *ngIf="locationReactive?.invalid && (locationReactive?.dirty || locationReactive?.touched)">
+                      <div *ngIf="locationReactive?.errors?.['required']">
+                          <p class="text-danger"> location is required </p>
+                      </div>
+                      <div *ngIf="locationReactive?.errors?.['minlength']">
+                          <p class="text-danger"> location must be of 3 alphabets </p>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="pwdReactive"> Password </label>
+                  <input type="password" id="pwdReactive" name="pwd" class="form-control" formControlName="pwdReactive">
+                  <div *ngIf="pwdReactive?.invalid && (pwdReactive?.dirty || pwdReactive?.touched)">
+                      <div *ngIf="pwdReactive?.errors?.['required']">
+                          <p class="text-danger"> Password is required</p>
+                      </div>
+                      <div *ngIf="pwdReactive?.errors?.['minlength']">
+                          <p class="text-danger"> Password must have atleast 4 chars</p>
+                      </div>
+                      <div *ngIf="pwdReactive?.errors?.['invalidPwd']">
+                          <p class="text-danger"> Password must starts with the word admin</p>
+                      </div>
+                  </div>
+              </div>
+              
+              <button type="button" class="btn btn-dark mt-4" (click)="add()">Register</button>
+              </form>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 d-flex flex-column justify-content-center p-5">
+        <div class="">
+          <img src="../../assets/Images/register.svg" class="img-fluid rounded-start" alt="...">
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

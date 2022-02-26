@@ -1,0 +1,14 @@
+.navbar-brand-img{
+    width: 22px;
+    height: 22px;
+    transform: translateY(-2px);
+    margin-left: 0.3rem;
+}
+
+.shubhbar{
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left:0;
+    right:0;
+}

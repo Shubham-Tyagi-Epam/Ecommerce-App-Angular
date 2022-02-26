@@ -1,0 +1,83 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <h3>Seach Product</h3>
+    </div>
+    <div class="p-3">
+        <div class="input-group my-3">
+            <span class="input-group-text" id="basic-addon2">Search</span>
+            <input type="text" class="form-control" placeholder="Search Product" aria-label="searchproduct" aria-describedby="searchproduct" #productTitle>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="titleSearch(productTitle.value)">See Results</button>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h3>Brands</h3>
+    </div>
+    <div *ngFor="let brand of brands" class="p-3">
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="brand" (input)="onChangeBrandsSelectEvent($event)" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                {{brand}}
+            </label>
+    
+    </div>
+</div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h3>Price Range</h3>
+    </div>
+    <div class="p-3">
+        <div class="input-group my-3">
+            <span class="input-group-text" id="basic-addon1">Lower Limit</span>
+            <input type="number" class="form-control" placeholder="Lower Limit" aria-label="lowerlimit" aria-describedby="lowerlimit" #inp1>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Upper Limit</span>
+            <input type="number" class="form-control" placeholder="Upper Limit" aria-label="upperlimit" aria-describedby="upperlimit" #inp2>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="priceRangeFilter(inp1.value,inp2.value)">See Results</button>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h3>Stars</h3>
+    </div>
+    <div class="p-3">
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="1" (input)="onChangeStarsSelectEvent($event)"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                1 star
+            </label>
+        </div>
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="2" (input)="onChangeStarsSelectEvent($event)"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                2 stars
+            </label>
+        </div>
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="3" (input)="onChangeStarsSelectEvent($event)"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                3 stars
+            </label>
+        </div>
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="4" (input)="onChangeStarsSelectEvent($event)"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                4 stars
+            </label>
+        </div>
+        <div class="form-check ">
+            <input class="form-check-input" type="checkbox" [name]="5" (input)="onChangeStarsSelectEvent($event)"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                5 stars
+            </label>
+        </div>
+    </div>
+</div>
+

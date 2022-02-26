@@ -1,0 +1,46 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-5 border d-flex justify-content-center py-5 px-0">
+            <img class="img-fluid" style="max-height: 40rem;" src="{{product.images[0]}}">
+        </div>
+        <div class="col-7 border d-flex-column justify-content-center align-items-center p-5">
+            <h2>{{product.title}}</h2>
+            <h2 class="my-4">₹{{product.price | priceFormatter}}</h2>
+            <div class="">
+                <p class="fw-bold mb-0">Description</p>
+                <p>{{product.description}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Brand</p>
+                <p>{{product.brand}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Size</p>
+                <p>{{product.size}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Camera</p>
+                <p>{{product.camera}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Cpu</p>
+                <p>{{product.cpu}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Memory</p>
+                <p>{{product.memory}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Display</p>
+                <p>{{product.display}}</p>
+            </div>
+            <div class="">
+                <p class="fw-bold mb-0">Battery</p>
+                <p>{{product.battery}}</p>
+            </div>
+            <div class="border-top pt-5">
+                <button class="btn btn-outline-primary" (click)="addToCart()"><i class="bi bi-cart-plus"></i> Add To Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

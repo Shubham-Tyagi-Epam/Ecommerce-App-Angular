@@ -1,0 +1,22 @@
+
+<div class="card product mb-5">
+    <a class="card-image-top product-link" (click)="routeForProduct()">
+        <img [src] = "product.images[0]" style="height: 23rem;">
+    </a>
+    <div class="card-body product-text">
+        <h4 class="card-title product-title">
+          <!-- <a [routerLink]="['/products', product.id]" >{{product.title}}</a> -->
+          {{product.title}}
+        </h4>
+        <h5 class="product-price">₹{{product.price | priceFormatter}}</h5>
+        <!-- <h5 class="product-price">{{product.price}} rs</h5> -->
+        <p class="card-text product-description">{{product.description}}</p>
+        <!-- <button
+          (click)="onAddProductToCart()"
+        class="btn btn-info product__add-to-cart">Add to cart
+        </button> -->
+        <button
+        class="btn btn-info product-add-to-cart" (click)="addToCart()">Add to cart
+        </button>
+      </div>
+</div>
