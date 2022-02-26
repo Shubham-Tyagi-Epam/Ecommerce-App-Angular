@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Fashion } from './Fashion';
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +7,10 @@ import { Injectable } from '@angular/core';
 export class MensFashionService {
 
   constructor() { }
-  products = [{
+  products:Fashion[] = [{
     title: 'Allen Solly Sweatshirt',
     category: 'Mens Fashion',
-    images: ['https://m.media-amazon.com/images/I/61HqUGX1DzL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/18/280-413/9801258696754.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258729522.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258762290.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/61HqUGX1DzL._UL1500_.jpg',
     brand: 'Allen Solly',
     price: 854,
     stars: 5,
@@ -22,7 +23,7 @@ export class MensFashionService {
   }, {
     title: 'Nike Men Pullover Sweater',
     category: 'Mens Fashion',
-    images: ['https://m.media-amazon.com/images/I/81VHSR01FSL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/21/280-413/9933217628210.jpg?v1', 'https://productimages.hepsiburada.net/s/21/280-413/9933217660978.jpg?v1', 'https://productimages.hepsiburada.net/s/21/280-413/9933217693746.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/81VHSR01FSL._UL1500_.jpg',
     brand: 'Nike',
     price: 2500,
     stars: 4,
@@ -35,7 +36,7 @@ export class MensFashionService {
   },  {
     title: "Allen Solly Men's Regular Fit Polo",
     category: 'Mens Fashion',
-    images: ['https://m.media-amazon.com/images/I/81RcNGzlIhL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/24/280-413/10094991441970.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10094991474738.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10094991507506.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/81RcNGzlIhL._UL1500_.jpg',
     brand: 'Allen Solly',
     price: 654.3434443,
     stars: 5,
@@ -48,7 +49,7 @@ export class MensFashionService {
   },{
     title: "Adidas Men's pullover sweater",
     category: 'Mens Fashion',
-    images: ['https://m.media-amazon.com/images/I/81YQ0VshN5L._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/19/280-413/9826975940658.jpg?v1', 'https://productimages.hepsiburada.net/s/19/280-413/9826975973426.jpg?v1', 'https://productimages.hepsiburada.net/s/19/280-413/9826976006194.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/81YQ0VshN5L._UL1500_.jpg',
     brand: 'Adidas',
     price: 3000,
     stars: 5,
@@ -61,7 +62,7 @@ export class MensFashionService {
   },{
     title: "Puma Men's Regular T-Shirt",
     category: 'Mens Fashion',
-    images: ['https://m.media-amazon.com/images/I/71QrY78nOuL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/24/280-413/10082391818290.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10082391851058.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10082391883826.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/71QrY78nOuL._UL1500_.jpg',
     brand: 'Allen Solly',
     price: 750.67443,
     stars: 4,

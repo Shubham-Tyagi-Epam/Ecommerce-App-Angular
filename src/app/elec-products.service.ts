@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Electronics } from './Electronics';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class ElecProductsService {
 
   constructor() { }
 
-  products = [{
+  products:Electronics[] = [{
     title: 'Apple iPhone 7 Plus 32 GB (Apple Türkiye Garantili)',
     category: 'electronics',
     images: ['https://productimages.hepsiburada.net/s/18/280-413/9801258663986.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258696754.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258729522.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258762290.jpg?v1'],

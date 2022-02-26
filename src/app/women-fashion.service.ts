@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Fashion } from './Fashion';
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +7,10 @@ import { Injectable } from '@angular/core';
 export class WomenFashionService {
 
   constructor() { }
-  products = [{
+  products:Fashion[] = [{
     title: "Adidas Women's Loose Fit T-Shirt",
     category: 'Women Fashion',
-    images: ['https://m.media-amazon.com/images/I/71Viush8QBL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/18/280-413/9801258696754.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258729522.jpg?v1', 'https://productimages.hepsiburada.net/s/18/280-413/9801258762290.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/71Viush8QBL._UL1500_.jpg',
     brand: 'Adidas',
     price: 854,
     stars: 5,
@@ -22,7 +23,7 @@ export class WomenFashionService {
   }, {
     title: "Adidas Women's Regular T-Shirt",
     category: 'Women Fashion',
-    images: ['https://m.media-amazon.com/images/I/61I6xpGFQpL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/21/280-413/9933217628210.jpg?v1', 'https://productimages.hepsiburada.net/s/21/280-413/9933217660978.jpg?v1', 'https://productimages.hepsiburada.net/s/21/280-413/9933217693746.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/61I6xpGFQpL._UL1500_.jpg',
     brand: 'Adidas',
     price: 900.23,
     stars: 4,
@@ -35,7 +36,7 @@ export class WomenFashionService {
   },  {
     title: "Nike Women's Regular T-Shirt",
     category: 'Women Fashion',
-    images: ['https://m.media-amazon.com/images/I/71FpxUIwmYL._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/24/280-413/10094991441970.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10094991474738.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10094991507506.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/71FpxUIwmYL._UL1500_.jpg',
     brand: 'Nike',
     price: 1254.3434443,
     stars: 2,
@@ -48,7 +49,7 @@ export class WomenFashionService {
   },{
     title: "Nike Women Sports Hoodie",
     category: 'Women Fashion',
-    images: ['https://m.media-amazon.com/images/I/81UBNh4qG5L._UL1500_.jpg', 'https://productimages.hepsiburada.net/s/19/280-413/9826975940658.jpg?v1', 'https://productimages.hepsiburada.net/s/19/280-413/9826975973426.jpg?v1', 'https://productimages.hepsiburada.net/s/19/280-413/9826976006194.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/81UBNh4qG5L._UL1500_.jpg',
     brand: 'Nike',
     price: 1500,
     stars: 5,
@@ -61,7 +62,7 @@ export class WomenFashionService {
   },{
     title: "PUMA Women WMN Graphic Jacket",
     category: 'Women Fashion',
-    images: ['https://m.media-amazon.com/images/I/51DB441b03L._UL1100_.jpg', 'https://productimages.hepsiburada.net/s/24/280-413/10082391818290.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10082391851058.jpg?v1', 'https://productimages.hepsiburada.net/s/24/280-413/10082391883826.jpg?v1'],
+    images: 'https://m.media-amazon.com/images/I/51DB441b03L._UL1100_.jpg',
     brand: 'Puma',
     price: 1750.67443,
     stars: 4,
