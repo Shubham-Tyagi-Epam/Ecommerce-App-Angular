@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidateEmail } from '../EmailValidator';
-import { RegisterService } from '../register.service';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerFormReactive = new FormGroup({
-      uidReactive : new FormControl('',[Validators.required, Validators.minLength(4)]),
+      uidReactive : new FormControl('',[Validators.required]),
       pwdReactive : new FormControl('',[Validators.required, Validators.minLength(4)]),
       nameReactive : new FormControl('',[Validators.required, Validators.minLength(3)]),
       locationReactive : new FormControl('',[Validators.required, Validators.minLength(3)]),
@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
       alert("Registration unsuccesful");
       return
     }
+   
     this.registerService.add(
       this.registerFormReactive.get(['uidReactive'])?.value,
       this.registerFormReactive.get(['nameReactive'])?.value,
@@ -40,9 +41,7 @@ export class RegisterComponent implements OnInit {
       this.registerFormReactive.get(['emailReactive'])?.value,
       this.registerFormReactive.get(['pwdReactive'])?.value
     );
-    console.log(this.registerService.Users);
-    alert("Registration Succesful");
-    this.router.navigateByUrl('/login');
+    // this.router.navigateByUrl('/login');
   }
 
   get uidReactive(){

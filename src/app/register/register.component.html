@@ -10,13 +10,10 @@
             <form class="" [formGroup]="registerFormReactive">
               <div class="form-group">
                   <label for="uidReactive"> User Id </label>
-                  <input type="text" id="uidReactive" class="form-control" formControlName="uidReactive">
+                  <input type="number" id="uidReactive" class="form-control" formControlName="uidReactive">
                   <div *ngIf="uidReactive?.invalid && (uidReactive?.dirty || uidReactive?.touched)">
                       <div *ngIf="uidReactive?.errors?.['required']">
                           <p class="text-danger"> User Id is required</p>
-                      </div>
-                      <div *ngIf="uidReactive?.errors?.['minlength']">
-                          <p class="text-danger"> User Id must have atleast 4 chars</p>
                       </div>
                   </div>
               </div>

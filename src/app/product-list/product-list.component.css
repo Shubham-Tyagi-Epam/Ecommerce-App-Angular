@@ -1,0 +1,35 @@
+.layout-mode{
+    display: flex;
+  flex-direction: row;
+  padding: .3rem;
+  border: 2px solid gray;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+.layout-mode .item{
+    width: .7rem;
+    height: .7rem;
+    background-color: gray;
+    margin-right: .3rem;
+   
+}
+
+
+.layout-mode .item.active{
+    background-color: dodgerblue;
+    border: 2px solid dodgerblue;
+}
+
+
+.layout-mode .item.last-item{
+    margin-right: 0rem;
+}
+
+/* .layout-mode .item:last-of-type {
+    margin-right: 0rem;
+} */
+
+.layout-mode:hover{
+    border: 2px solid #646464;
+    /* border: 2px solid green; */
+}

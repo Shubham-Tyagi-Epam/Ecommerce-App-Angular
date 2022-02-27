@@ -1,7 +1,10 @@
 
 <div class="card product mb-5">
     <a class="card-image-top product-link" (click)="routeForProduct()">
-        <img [src] = "product.images" style="height: 23rem;">
+        <img [src]="currentImage" (mousemove)="onImageChange($event)"
+        (touchmove)="onImageChange($event)"
+    (touchout)="onImageMouseOut($event)"
+    (mouseout)="onImageMouseOut($event)" #productImageContainer [ngStyle]="{'height' : imgHeight+'rem' }" class="img-fluid">
     </a>
     <div class="card-body product-text">
         <h4 class="card-title product-title">

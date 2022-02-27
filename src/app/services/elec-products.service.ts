@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Electronics } from './Electronics';
+import { Electronics } from '../Electronics';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElecProductsService {
 
-  constructor() { }
-
+  constructor(private restService:RestService) {
+    this.getElecProduct();
+   }
+/*
   products:Electronics[] = [{
     title: 'Apple iPhone 7 Plus 32 GB (Apple Türkiye Garantili)',
     category: 'electronics',
@@ -121,11 +124,41 @@ export class ElecProductsService {
     id: 6,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!'
   }];
-  dupProducts:any[] = this.products;
+  */
+  dupProducts!:any[];
+  products!:any[];
+  allProducts!:any[];
   getElecProducts(){
     return this.dupProducts;
   }
-
+  getAllProducts(){
+    return this.allProducts;
+  }
+  getElecProduct(){
+    // return this.dupProducts;
+    console.log("Called again");
+    console.log("geee");
+    this.restService.getAllElectronicsProducts().subscribe({
+      next : (data:any)=>{
+        console.log("subscribe data ");
+        console.log(data);
+        this.dupProducts = data;
+        this.products = data;
+        this.allProducts = data;
+        this.dupProducts = this.dupProducts.filter((p)=>{
+          return p.category == "electronics";
+        })
+        this.products = this.products.filter((p)=>{
+          return p.category == "electronics";
+        })
+        console.log("products  = "  )
+        console.log(this.dupProducts)
+      },
+      error : (err)=>{
+          console.log("connot retrieve data : " + err.error);
+      }
+    });
+  }
   priceRangeFilter(lower:number,higher:number){
     if(lower == 0 && higher == 0)
       this.dupProducts = this.products;

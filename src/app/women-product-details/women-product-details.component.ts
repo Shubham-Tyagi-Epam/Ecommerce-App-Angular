@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthGuardService } from '../auth-guard.service';
-import { WomenFashionService } from '../women-fashion.service';
+import { Fashion } from '../Fashion';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { WomenFashionService } from '../services/women-fashion.service';
 
 @Component({
   selector: 'app-women-product-details',
@@ -9,7 +10,9 @@ import { WomenFashionService } from '../women-fashion.service';
   styleUrls: ['./women-product-details.component.css']
 })
 export class WomenProductDetailsComponent implements OnInit {
-
+  product!:Fashion;
+  images!:string[];
+  currentImg!:string;
   constructor(private activatedRoute:ActivatedRoute,private womenFashionService:WomenFashionService,private authGuardService:AuthGuardService,private router:Router) { }
   idForRouting = 0;
   ngOnInit(): void {
@@ -17,10 +20,14 @@ export class WomenProductDetailsComponent implements OnInit {
       this.idForRouting = Number(param.get('id'));
 
     })
+    this.productList = this.womenFashionService.getAllProducts();
+    this.product = this.getProduct();
+    this.images = this.product.images.split(" ");
+    this.currentImg = this.images[0];
   }
-  productList = this.womenFashionService.getElecProducts();
+  productList!:Fashion[];
   // product!:any;
-  get product(){
+  getProduct(){
     let count = 0;
     for(let p of this.productList){
       if(count == this.idForRouting)
@@ -38,5 +45,8 @@ export class WomenProductDetailsComponent implements OnInit {
       strUrlForRouting = "login";
       this.router.navigate([strUrlForRouting]);
     }
+  }
+  changeImage(img:string){
+    this.currentImg = img;
   }
 }

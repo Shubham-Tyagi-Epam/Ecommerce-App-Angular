@@ -3,7 +3,7 @@ export class Electronics{
     id!:number;
     title!:string;
     category!:string;
-    images!:string[];
+    images!:string;
     brand!:string;
     price!:number;
     stars!:number;
@@ -16,7 +16,7 @@ export class Electronics{
     memory!:string;
     description!:string;
 
-    constructor(id:number,title:string,category:string,images:string[],brand:string,
+    constructor(id:number,title:string,category:string,images:string,brand:string,
 price:number,stars:number,cpu:string,camera:string,size:string,weight:string,display:string,battery:string,memory:string,description:string){
         this.id = id;
         this.title = title;

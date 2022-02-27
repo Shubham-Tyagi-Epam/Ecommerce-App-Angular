@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { AuthGuardService } from '../auth-guard.service';
-import { AuthentificationService } from '../authentification.service';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-header',

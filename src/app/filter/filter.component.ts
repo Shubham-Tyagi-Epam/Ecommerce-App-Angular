@@ -1,9 +1,10 @@
-import { PathLocationStrategy } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ElecProductsService } from '../elec-products.service';
-import { KidsFashionService } from '../kids-fashion.service';
-import { MensFashionService } from '../mens-fashion.service';
-import { WomenFashionService } from '../women-fashion.service';
+
+import { AfterViewChecked, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { ElecProductsService } from '../services/elec-products.service';
+import { KidsFashionService } from '../services/kids-fashion.service';
+import { MensFashionService } from '../services/mens-fashion.service';
+import { RestService } from '../services/rest.service';
+import { WomenFashionService } from '../services/women-fashion.service';
 
 @Component({
   selector: 'app-filter',
@@ -13,7 +14,7 @@ import { WomenFashionService } from '../women-fashion.service';
 export class FilterComponent implements OnInit {
   @Input('productType') productType!:string;
 
-  constructor(private elecProductService:ElecProductsService,private mensFashionService:MensFashionService,private womenFashionService:WomenFashionService, private kidsFashionService:KidsFashionService) { }
+  constructor(private elecProductService:ElecProductsService,private mensFashionService:MensFashionService,private womenFashionService:WomenFashionService, private kidsFashionService:KidsFashionService,private restService:RestService) { }
   brands:string[]=[];
   productList:any[]=[];
   checkedBrands:any[] = [];
@@ -21,6 +22,11 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductList();
+  }
+  filterBrands(type:string){
+    this.productList = this.productList.filter((p)=>{
+      return p.category == type;
+    });
     for(let product of this.productList){
       this.brands.push(product.brand);
     }
@@ -30,28 +36,53 @@ export class FilterComponent implements OnInit {
   }
   getProductList(){
     if(this.productType == "Electronics"){
-      
-    this.productList = this.elecProductService.getElecProducts();
-    console.log("Electronics");
-    console.log(this.productList);
+      this.restService.getAllElectronicsProducts().subscribe({
+        next : (data:any)=>{
+          this.productList = data;
+          console.log(this.productList);
+          this.filterBrands("electronics");
+        },
+        error : ()=>{
+          console.log("Error");
+        }
+      });
     }
     else if(this.productType == "MensFashion"){
-    this.productList = this.mensFashionService.getElecProducts();
+
+      this.restService.getAllFashionProducts().subscribe({
+        next : (data:any)=>{
+          this.productList = data;
+          this.filterBrands("Mens Fashion");
+        },
+        error : ()=>{
+          console.log("Error");
+        }
+      });
     
-    console.log("mens fashion");
-    console.log(this.productList);
     }
     else if(this.productType == "WomenFashion"){
-      this.productList = this.womenFashionService.getElecProducts();
-      
-      console.log("Women fashion");
-      console.log(this.productList);
+        this.restService.getAllFashionProducts().subscribe({
+          next : (data:any)=>{
+            this.productList = data;
+            console.log(this.productList);
+            this.filterBrands("Women Fashion");
+          },
+          error : ()=>{
+            console.log("Error");
+          }
+        });
       }
     else if(this.productType == "KidsFashion"){
-        this.productList = this.kidsFashionService.getElecProducts();
-        
-        console.log("Kids fashion");
-        console.log(this.productList);
+      this.restService.getAllFashionProducts().subscribe({
+        next : (data:any)=>{
+          this.productList = data;
+          console.log(this.productList);
+          this.filterBrands("Kids Fashion");
+        },
+        error : ()=>{
+          console.log("Error");
+        }
+      });
         }
 
   }

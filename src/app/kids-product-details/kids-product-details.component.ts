@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthGuardService } from '../auth-guard.service';
-import { KidsFashionService } from '../kids-fashion.service';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { KidsFashionService } from '../services/kids-fashion.service';
+import { PriceFormatterPipe } from '../pipes/price-formatter.pipe';
+import { Fashion } from '../Fashion';
 
 @Component({
   selector: 'app-kids-product-details',
@@ -17,8 +19,9 @@ export class KidsProductDetailsComponent implements OnInit {
       this.idForRouting = Number(param.get('id'));
 
     })
+    this.productList = this.kidsFashionService.getAllProducts();
   }
-  productList = this.kidsFashionService.getElecProducts();
+  productList!:Fashion[];
   // product!:any;
   get product(){
     let count = 0;

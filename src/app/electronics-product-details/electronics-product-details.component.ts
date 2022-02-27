@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthGuardService } from '../auth-guard.service';
-import { ElecProductsService } from '../elec-products.service';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { ElecProductsService } from '../services/elec-products.service';
+
+import { PriceFormatterPipe } from '../pipes/price-formatter.pipe';
+import { Electronics } from '../Electronics';
 
 @Component({
   selector: 'app-electronics-product-details',
@@ -9,6 +12,10 @@ import { ElecProductsService } from '../elec-products.service';
   styleUrls: ['./electronics-product-details.component.css']
 })
 export class ElectronicsProductDetailsComponent implements OnInit {
+  
+  product!:Electronics;
+  images!:string[];
+  currentImg!:string;
   constructor(private activatedRoute:ActivatedRoute, private elecProductsService:ElecProductsService,private authGuardService:AuthGuardService,private router:Router) { }
   idForRouting = 0;
   ngOnInit(): void {
@@ -16,11 +23,15 @@ export class ElectronicsProductDetailsComponent implements OnInit {
       this.idForRouting = Number(param.get('id'));
 
     })
+    this.productList = this.elecProductsService.getAllProducts();
+    this.product = this.getProduct();
+    this.images = this.product.images.split(" ");
+    this.currentImg = this.images[0];
   }
-  productList = this.elecProductsService.getElecProducts();
+  productList!:Electronics[];
   // product!:any;
 
-  get product(){
+  getProduct(){
     let count = 0;
     for(let p of this.productList){
       if(count == this.idForRouting)
@@ -39,5 +50,8 @@ export class ElectronicsProductDetailsComponent implements OnInit {
       strUrlForRouting = "login";
       this.router.navigate([strUrlForRouting]);
     }
+  }
+  changeImage(img:string){
+    this.currentImg = img;
   }
 }

@@ -1,9 +1,19 @@
-<div class="container my-5">
+<div class="container product-details">
     <div class="row">
-        <div class="col-5 border d-flex justify-content-center py-5 px-0">
-            <img class="img-fluid" style="max-height: 40rem;" src="{{product.images[0]}}">
+        <div class="col-md-5 border justify-content-center">
+            <div class="row">
+                <div class="col p-2">
+                <img class="img-fluid" style ="max-height: 40rem;" src="{{currentImg}}">
+            </div>
+            </div>
+            
+            <div class="row border-top pt-3 mb-4">
+                <div *ngFor="let img of images" class="col ">
+                   <img class="img-fluid border p-2 small-img" (click)="changeImage(img)" style="max-height: 7rem;"src = {{img}}>
+                </div>
+            </div>
         </div>
-        <div class="col-7 border d-flex-column justify-content-center align-items-center p-5">
+        <div class="col-md-7 border d-flex-column justify-content-around align-items-center p-5">
             <h2>{{product.title}}</h2>
             <h2 class="my-4">₹{{product.price | priceFormatter}}</h2>
             <div class="">
@@ -20,7 +30,7 @@
             </div>
             <div class="">
                 <p class="fw-bold mb-0">Dimension</p>
-                <p>{{product.dimension}}</p>
+                <p>{{product.dimensions}}</p>
             </div>
             <div class="">
                 <p class="fw-bold mb-0">Weight</p>

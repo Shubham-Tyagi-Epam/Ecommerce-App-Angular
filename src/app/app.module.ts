@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
-import { PriceFormatterPipe } from './price-formatter.pipe';
+import { PriceFormatterPipe } from './pipes/price-formatter.pipe';
 import { ElectronicsProductDetailsComponent } from './electronics-product-details/electronics-product-details.component';
 import { FilterComponent } from './filter/filter.component';
 import { MensFashionComponent } from './mens-fashion/mens-fashion.component';
@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
