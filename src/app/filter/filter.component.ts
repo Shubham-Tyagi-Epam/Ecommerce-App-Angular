@@ -19,11 +19,28 @@ export class FilterComponent implements OnInit {
   productList:any[]=[];
   checkedBrands:any[] = [];
   checkedStars:any[] = [];
-
+  titleSrch:string = "";
+  maxPrice:number = 0;
+  rangeValue:number = 3000;
   ngOnInit(): void {
     this.getProductList();
+    this.womenFashionService.setProducts();
+    this.mensFashionService.setProducts();
+    this.elecProductService.setProducts();
+    this.kidsFashionService.setProducts();
   }
+
+  getMaxPrice(){
+    for(let product of this.productList){
+      if(product.price > this.maxPrice )
+        this.maxPrice = product.price;
+    }
+    this.maxPrice += this.maxPrice/5;
+    this.rangeValue = this.maxPrice;
+  }
+
   filterBrands(type:string){
+    this.getMaxPrice();
     this.productList = this.productList.filter((p)=>{
       return p.category == type;
     });
@@ -102,6 +119,10 @@ export class FilterComponent implements OnInit {
       console.log(inp1,inp2);
   }
  
+  priceRangeFilterSlider(){
+    this.priceRangeFilter("0",String(this.rangeValue));
+  }
+
   onChangeBrandsSelectEvent(e:any){
     let name = e.target.name;
     let value = e.target.checked;
@@ -165,7 +186,9 @@ export class FilterComponent implements OnInit {
     this.checkedStars = this.checkedStars.filter((star)=>(star!=removeStarVal));
   }
 
-  titleSearch(searchString:string){
+  titleSearch(){
+    let searchString = this.titleSrch;
+    console.log(this.titleSearch);
     if(this.productType == "Electronics"){
       this.elecProductService.titleFilter(searchString);;
     }

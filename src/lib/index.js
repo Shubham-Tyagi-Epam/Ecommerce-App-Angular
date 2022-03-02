@@ -16,6 +16,11 @@ const sequelize = new Sequelize(db.DB,db.USER,db.PASSWORD,{
     } 
  });
 
+// ------------------------------------------
+// Fashion Table
+// ------------------------------------------
+
+
  let fashionTable = sequelize.define('fashionSequelize',{
     id : {
         primaryKey : true,
@@ -46,7 +51,7 @@ fashionTable.sync().then(()=>{
 
 app.get("/getAllFashionProducts",(req,res)=>{
     fashionTable.findAll({raw:true}).then((data)=>{
-        console.log("Data from the students table fetched succesfully");
+        console.log("Data from the Fashion table fetched succesfully");
         res.status(200).send(data);
     }).catch((err)=>{
         console.log("Error occured while fetching the data");
@@ -145,6 +150,10 @@ app.delete("/deleteFashionProduct/:id",(req,res)=>{
     });
 });
 
+// ------------------------------------------
+// Customers Table
+// ------------------------------------------
+
 let customerTable = sequelize.define('customerSequelize',{
     id : {
         primaryKey : true,
@@ -208,6 +217,10 @@ app.post("/login",(req,res)=>{
     });
 });
 
+// ------------------------------------------
+// Electronics Table
+// ------------------------------------------
+
 let electronicsTable = sequelize.define('electronicSequelize',{
     id : {
         primaryKey : true,
@@ -242,7 +255,7 @@ electronicsTable.sync().then(()=>{
 
 app.get("/getAllElectronicsProducts",(req,res)=>{
     electronicsTable.findAll({raw:true}).then((data)=>{
-        console.log("Data from the students table fetched succesfully");
+        console.log("Data from the Electronics table fetched succusfully");
         res.status(200).send(data);
     }).catch((err)=>{
         console.log("Error occured while fetching the data");
@@ -360,4 +373,118 @@ app.delete("/deleteElectronicsProduct/:id",(req,res)=>{
 
 app.listen(8001,function(){
    console.log("Listeniong at 8001...."); 
+});
+
+// ------------------------------------------
+// Cart Table
+// ------------------------------------------
+
+let cartTable = sequelize.define(
+    'cartSequelize',{
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+    c_id : Sequelize.INTEGER,
+    p_id : Sequelize.INTEGER,
+    p_tab : Sequelize.STRING,
+    p_qty : Sequelize.INTEGER,
+
+    },{
+        timestamps : false,
+        freezeTableName : true
+    }
+);
+
+cartTable.sync().then(()=>{
+    console.log("Connected with the table cartSequelize");
+}).catch((err)=>{
+    console.log("Unable to create/connect with the table cartSequelize...");
+});
+
+
+app.post("/insertCartProduct",(req,res)=>{
+    console.log("sdsd" + JSON.stringify(req.body));
+    // id_param = 0;
+    c_id_param = req.body.c_id;
+    p_id_param = req.body.p_id;
+    p_tab_param = req.body.p_tab;
+    p_qty_param = req.body.p_qty;
+
+    let custObj = cartTable.build({
+        // id : id_param,
+        c_id : c_id_param,
+        p_id : p_id_param,
+        p_tab : p_tab_param,
+        p_qty : p_qty_param
+    });
+    console.log("custObj = " + p_id_param);
+    // res.status(201).send("str");
+    custObj.save().then((data)=>{
+            let str = "Product added to cart succesfully";
+            console.log(str);
+            res.status(201).send(str);
+    }).catch((err)=>{
+        let str = "We were unable to add the product to the cart";
+        console.log(str +err); 
+        res.status(404).send(str + err);
+    });
+});
+
+app.put("/updateCartProduct",(req,res)=>{  
+   
+    c_id_param = req.body.c_id;
+    p_id_param = req.body.p_id;
+    p_tab_param = req.body.p_tab;
+    p_qty_param = req.body.p_qty;
+
+
+    cartTable.update({
+        c_id : c_id_param,
+        p_id : p_id_param,
+        p_tab : p_tab_param,
+        p_qty : p_qty_param
+    },{where:{[Sequelize.Op.and]:[{c_id:c_id_param},{p_id:p_id_param},{p_tab:p_tab_param}]}}).then((data)=>{
+        let str = "Record updated succesfully";
+        console.log(str);
+        res.status(200).send(str);
+    }).catch((err)=>{
+        let str = "Record not there in the table"; 
+        console.log(str);
+        res.status(404).send(str);
+    });
+}
+);
+
+
+app.get("/CartProductsForUser/:Id",(req,res)=>{
+    id = req.params.Id;
+    cartTable.findAll({where:{c_id:id}},{raw:true}).then((data)=>{
+            console.log("Data is fetched succesfully");
+            res.status(200).send(data);
+        }
+    ).catch((err)=>{
+        let strErr = "Unable to fetch the given record"; 
+        console.log(strErr);
+        res.status(404).send(strErr);
+    })
+});
+
+app.delete("/deleteCartItem/:c_id/:p_id/:p_tab",(req,res)=>{
+    let c_id_param = req.params.c_id;
+    let p_id_param = req.params.p_id;
+    let p_tab_param = req.params.p_tab;
+    console.log(req.params.p_id);
+    cartTable.destroy({where:{[Sequelize.Op.and]:[{c_id:c_id_param},{p_id:p_id_param},{p_tab:p_tab_param}]}}).then((data)=>{
+        let str = "Record deleted succesfully"
+        console.log(str);
+        res.status(201).send(str)
+    }).catch(
+       (err)=>{
+           let str = "Error in deleting the recrds"
+           console.log(str + err);
+           res.status(404).send(str + err)
+       } 
+    );
 });

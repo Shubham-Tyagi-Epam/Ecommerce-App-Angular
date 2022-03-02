@@ -19,10 +19,17 @@
           </div>
         </div>
       </div>
-    <div class="row ">
+    <div *ngIf="products.length!=0; else noProducts" class="row">
         <div [ngClass]="colValue" class="col-md-6" *ngFor="let product of products">
             <app-product [product]="product" productType="{{productType}}" [imgHeight]="imgHeight">
             </app-product>
         </div>
     </div>
+    <ng-template #noProducts>
+      <div class="row justify-content-center align-items-center no-product">
+      <img src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg" style="max-height:20rem">
+   
+    </div>
+  </ng-template>
+
 </div>

@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
 import {cumulativeOffSet} from '../cumulativeOffset';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +13,7 @@ export class ProductComponent implements OnInit,OnChanges {
   @Input('product') product:any;
   @Input('productType') productType!:string;
   @Input('imgHeight') imgHeight!:number;
-  constructor(private router:Router, private activatedRoute:ActivatedRoute,private authGuardService:AuthGuardService,private productImageContainer:ElementRef) {
+  constructor(private router:Router, private activatedRoute:ActivatedRoute,private authGuardService:AuthGuardService,private productImageContainer:ElementRef,private cartService:CartService) {
     // this.currentImage  = this.product.images[0];
    }
   
@@ -55,7 +56,14 @@ export class ProductComponent implements OnInit,OnChanges {
   addToCart(){
     let strUrlForRouting;
     if(this.authGuardService.canActivate()){
-      alert('Cart Functionality will be aded soon');
+      if(this.productType == "MensFashion" || this.productType == "WomenFashion" || this.productType == "idsFashion"){
+        console.log("this.product.pid = ",this.product.id)
+        this.cartService.insertCartProduct(this.product.id,"Fashion");
+        // alert('Product inserted');
+      }
+      else{
+        this.cartService.insertCartProduct(this.product.id,"E;ectronics");
+      }
     }
     else{
       strUrlForRouting = "login";

@@ -1,0 +1,22 @@
+<div class="price-details border">
+    <p class="border-bottom heading p-3 fs-4">Price Details</p>
+    <div class="px-4 fs-5 pb-4">
+        <div class="row my-5 justify-content-between">
+            <div class="col">Price </div>
+            <div class="col text-end">₹{{price}}</div>
+        </div>
+        <div class="row my-5 justify-content-between">
+            <div class="col">Discount</div>
+            <div class="col text-end" style="color: #388E3C;">- ₹{{discount}}</div>
+        </div>
+        <div class="row my-5 justify-content-between">
+            <div class="col">Delivery Charges</div>
+            <div *ngIf="deliveryCharges>0" class="col text-end" style="color: #388E3C;">₹{{deliveryCharges}}</div>
+            <div *ngIf="deliveryCharges<=0" class="col text-end" style="color: #388E3C;">FREE</div>
+        </div>
+        <div class="row justify-content-between border-top border-bottom py-3 fw-bold">
+            <div class="col">Total Amount</div>
+            <div class="col text-end">₹{{totalAmount}}</div>
+        </div>      
+    </div>
+</div>

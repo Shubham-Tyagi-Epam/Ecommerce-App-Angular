@@ -31,7 +31,7 @@
             <a class="nav-link">Orders</a>
           </li>
           <li *ngIf="loggedin"  class="nav-item">
-            <a class="nav-link">Cart</a>
+            <a class="nav-link" routerLinkActive="active"  routerLink="/cart">Cart</a>
           </li>
           <li *ngIf="loggedin"  class="nav-item">
             <a class="nav-link" routerLink="/home" (click)="logout()"><button class="btn btn-secondary fs-5">Logout</button></a>

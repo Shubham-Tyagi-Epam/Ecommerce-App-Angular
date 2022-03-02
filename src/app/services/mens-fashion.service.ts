@@ -13,82 +13,23 @@ export class MensFashionService {
     this.getElecProduct();
     this.dupProducts = this.products
    }
-//   products:Fashion[] = [{
-//       title: 'Allen Solly Sweatshirt',
-//       category: 'Mens Fashion',
-//       images: 'https://m.media-amazon.com/images/I/61HqUGX1DzL._UL1500_.jpg',
-//       brand: 'Allen Solly',
-//       price: 854,
-//       stars: 5,
-//       id: 0,
-//       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-//       manufacturer  : 'Aditya Birla Fashion and Retail Limited',
-//       weight : '350 g',
-//       dimensions : '15 x 15 x 3',
-//       genericName : 'Men Shirt'
-//   }, {
-//     title: 'Nike Men Pullover Sweater',
-//     category: 'Mens Fashion',
-//     images: 'https://m.media-amazon.com/images/I/81VHSR01FSL._UL1500_.jpg',
-//     brand: 'Nike',
-//     price: 2500,
-//     stars: 4,
-//     id: 1,
-//     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-//     manufacturer  : 'NIKE INDIA PVT LTD',
-//     weight : '450 g',
-//     dimensions : '65 x 46 x 2',
-//     genericName : 'Pullover Sweater'
-//   },  {
-//     title: "Allen Solly Men's Regular Fit Polo",
-//     category: 'Mens Fashion',
-//     images: 'https://m.media-amazon.com/images/I/81RcNGzlIhL._UL1500_.jpg',
-//     brand: 'Allen Solly',
-//     price: 654.3434443,
-//     stars: 5,
-//     id: 2,
-//     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-//     manufacturer  : 'Aditya Birla Fashion and Retail Limited',
-//     weight : '200 g',
-//     dimensions : '25 x 20 x 2',
-//     genericName : 'T-Shirt'
-//   },{
-//     title: "Adidas Men's pullover sweater",
-//     category: 'Mens Fashion',
-//     images: 'https://m.media-amazon.com/images/I/81YQ0VshN5L._UL1500_.jpg',
-//     brand: 'Adidas',
-//     price: 3000,
-//     stars: 5,
-//     id: 3,
-//     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-//     manufacturer  : 'Adidas india pvt ltd',
-//     weight : '350 g',
-//     dimensions : '36.7 x 27.61 x 6.1',
-//     genericName : 'Pullover Sweater'
-//   },{
-//     title: "Puma Men's Regular T-Shirt",
-//     category: 'Mens Fashion',
-//     images: 'https://m.media-amazon.com/images/I/71QrY78nOuL._UL1500_.jpg',
-//     brand: 'Allen Solly',
-//     price: 750.67443,
-//     stars: 4,
-//     id: 4,
-//     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-//     manufacturer  : 'Puma India Pvt Ltd',
-//     weight : '150 g',
-//     dimensions : ' 10 x 2 x 2.7',
-//     genericName : 'T-Shirt'
-//   }
-// ];
-
   productLst:Fashion[] = []
   dupProducts:Fashion[] = [];
   allProducts:Fashion[] = [];
+  checkedBrands:any[] = [];
+  lowerLimit:number = 0;
+  upperLimit:number = 0;
+  checkedStars:any[]=[];
+  titleSearch:string = "";
+
   getElecProducts(){
     return this.dupProducts
   }
   getAllProducts(){
     return this.allProducts;
+  }
+  setProducts(){
+    this.dupProducts = this.products;
   }
   getElecProduct(){
     // return this.dupProducts;
@@ -116,40 +57,65 @@ export class MensFashionService {
     });
   }
 
-  getOriginalProduct(){
-    return of(this.products);
+  // getOriginalProduct(){
+  //   return of(this.products);
+  // }
+  prf(lower:number,higher:number){
+    if(higher != 0 && lower<higher){
+      this.dupProducts = this.dupProducts.filter((product)=>{return product.price<=higher && product.price>=lower});
+    }
   }
-
   priceRangeFilter(lower:number,higher:number){
-    if(lower == 0 && higher == 0)
-      this.dupProducts = this.products;
-    else{
-      this.dupProducts = this.products.filter((product)=>{return product.price<=higher && product.price>=lower});
-    }
+    this.lowerLimit = lower;
+    this.upperLimit = higher;
+    this.dupProducts = this.products;
+    this.filterAll();
+    // if(lower == 0 && higher == 0)
+    //   this.dupProducts = this.products;
+   
   }
-
+ bf(checkedBrands:any[]){
+  if(checkedBrands.length != 0){
+    this.dupProducts = this.dupProducts.filter((product)=>(checkedBrands.indexOf(product.brand)!=-1));
+  }
+ }
   brandsFilter(checkedBrands:any[]){
-    if(checkedBrands.length == 0)
-      this.dupProducts = this.products;
-    else{
-      this.dupProducts = this.products.filter((product)=>(checkedBrands.indexOf(product.brand)!=-1));
+    this.checkedBrands = checkedBrands;
+    // if(checkedBrands.length == 0)
+    //   this.dupProducts = this.products;
+    this.dupProducts = this.products;
+    this.filterAll();
+  }
+  sf(checkedStars:any[]){
+    if(checkedStars.length != 0){
+      this.dupProducts = this.dupProducts.filter((product)=>(checkedStars.indexOf(String(product.stars))!=-1));
     }
   }
-
   starsFilter(checkedStars:any[]){
-    if(checkedStars.length == 0)
-      this.dupProducts = this.products;
-    else{
-      this.dupProducts = this.products.filter((product)=>(checkedStars.indexOf(String(product.stars))!=-1));
+    this.checkedStars = checkedStars;
+    // if(checkedStars.length == 0)
+    //   this.dupProducts = this.products;
+    this.dupProducts = this.products;
+    this.filterAll();
+  }
+  tf(title:string){
+    if(title.length != 0){
+      this.dupProducts = this.dupProducts.filter((product)=>(product.title.toLowerCase().includes(title.toLowerCase())));
     }
   }
-
   titleFilter(title:string){
-    if(title.length == 0)
-      this.dupProducts = this.products;
-    else{
-      this.dupProducts = this.products.filter((product)=>(product.title.toLowerCase().includes(title.toLowerCase())));
-    }
+    this.titleSearch = title;
+    // if(title.length == 0)
+    //   this.dupProducts = this.products;
+    this.dupProducts = this.products;
+    this.filterAll();
+  }
+
+  filterAll(){
+    this.prf(this.lowerLimit,this.upperLimit);
+    this.bf(this.checkedBrands);
+    this.sf(this.checkedStars);
+    this.tf(this.titleSearch);
   }
 
 }

@@ -1,0 +1,43 @@
+
+    <div class="row cart-prod border-bottom">
+        <div class="row">
+            <div class="col-md-2"><img src = {{currentImage}} class="img-fluid" style="max-height: 8rem;"></div>
+            <div class="col-md-9">
+                <h4 style="margin-bottom:0">{{product.title}}</h4>
+                <p class="text-muted">In Stock</p>
+                <!-- <p *ngIf="product.manufacturer" class="text-muted">Seller: {{product.manufacturer}}</p> -->
+                <img src="../../assets/Images/assured.jpg" style="height: 1.5rem;">
+                <h5 class="mt-2">₹{{product.price}}</h5>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-2  align-items-center">
+                <img src="../../assets/Images/minus.png" (click)="updateCartProductQty('decrease')" style="height: 1.5rem; padding-left: 0.5rem;cursor: pointer;">
+                <!-- <button class="ps-2 rounded m-2 btn btn-secondary" (click)="updateCartProductQty('decrease')">-</button> -->
+                {{cartProduct.p_qty}}
+                <!-- <button class="m-2 ps-2 btn btn-secondary rounded" (click)="updateCartProductQty('increase')">+</button> -->
+                <img src="../../assets/Images/plus.png" (click)="updateCartProductQty('increase')"  style="height: 1.5rem;cursor: pointer;">
+            </div>
+            <div class="col-md-9 align-items-center">
+                <h4 class="remove" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header no-border-top-bottom">
+              <h4 class="modal-title " id="removeModalLabel">Remove Item</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body fs-5 text-muted">
+              Are you sure you want to remove this item? 
+            </div>
+            <div class="modal-footer no-border-top-bottom">
+              <button type="button" class="btn fs-5" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger fs-5" (click)="deleteCartProduct()" data-bs-dismiss="modal">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>

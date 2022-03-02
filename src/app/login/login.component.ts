@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit,DoCheck {
     // }
     this.restSerice.loginCustomer(this.loginFormReactive.get('uidReactive')?.value,this.loginFormReactive.get('pwdReactive')?.value).subscribe({
       next : (data)=>{
-        this.authentificationService.login();
+        this.authentificationService.login(this.loginFormReactive.get('uidReactive')?.value);
         alert("Login Succesfull");
         this.router.navigate(["/home"]);
       },

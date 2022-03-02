@@ -7,10 +7,13 @@ export class AuthentificationService {
 
   constructor() { }
   varIsLoggedIn = "isLoggedIn";
-  login(){
+  varCustId = "custId";
+  login(id:number){
     localStorage.setItem(this.varIsLoggedIn,"true");
+    localStorage.setItem(String(this.varCustId),String(id));
   }
   logout(){
     localStorage.setItem(this.varIsLoggedIn,"false");
+    localStorage.setItem(String(this.varCustId),String(0));
   }
 }

@@ -23,7 +23,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { CartComponent } from './cart/cart.component';
+import { CartProductComponent } from './cart-product/cart-product.component';
+import { PriceDetailsComponent } from './price-details/price-details.component'
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import {HttpClientModule} from '@angular/common/http'
     WomenProductDetailsComponent,
     KidsProductDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartComponent,
+    CartProductComponent,
+    PriceDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,9 @@
     <div class="p-3">
         <div class="input-group my-3">
             <span class="input-group-text" id="basic-addon2">Search</span>
-            <input type="text" class="form-control" placeholder="Search Product" aria-label="searchproduct" aria-describedby="searchproduct" #productTitle>
+            <input type="text" class="form-control" placeholder="Search Product" aria-label="searchproduct" aria-describedby="searchproduct" [(ngModel)]="titleSrch" (input)="titleSearch()">
         </div>
-        <button type="button" class="btn btn-primary" (click)="titleSearch(productTitle.value)">See Results</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="titleSearch(productTitle.value)">See Results</button> -->
     </div>
 </div>
 
@@ -33,13 +33,18 @@
     <div class="p-3">
         <div class="input-group my-3">
             <span class="input-group-text" id="basic-addon1">Lower Limit</span>
-            <input type="number" class="form-control" placeholder="Lower Limit" aria-label="lowerlimit" aria-describedby="lowerlimit" #inp1>
+            <input type="number" class="form-control" placeholder="Lower Limit" aria-label="lowerlimit" aria-describedby="lowerlimit" value=0 [disabled]="true">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Upper Limit</span>
-            <input type="number" class="form-control" placeholder="Upper Limit" aria-label="upperlimit" aria-describedby="upperlimit" #inp2>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="priceRangeFilter(inp1.value,inp2.value)">See Results</button>
+            <input type="number" class="form-control" placeholder="Upper Limit" aria-label="upperlimit" aria-describedby="upperlimit" [(ngModel)]="rangeValue" (input)="priceRangeFilterSlider()">
+        </div> 
+        <!-- <button type="button" class="btn btn-primary" (click)="priceRangeFilter(inp1.value,inp2.value)">See Results</button> -->
+        <input type="range" class="form-range" min="0" [max]="maxPrice" step="10" [(ngModel)]="rangeValue"  list="tickmarks" (input)="priceRangeFilterSlider()" >
+        <datalist id="tickmarks">
+            <option value="0" label="0%"></option>
+            <option value="50" label="50%"></option>
+        </datalist>
     </div>
 </div>
 
