@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit,DoCheck {
   }
 
   ngDoCheck(): void {
-      this.registeredUsers = this.registerService.Users;
+      // this.registeredUsers = this.registerService.Users;
   }
 
   login(){

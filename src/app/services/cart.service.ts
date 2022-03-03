@@ -2,6 +2,7 @@ import { DoCheck, Injectable } from '@angular/core';
 import { Cart } from '../Cart';
 import { Electronics } from '../Electronics';
 import { Fashion } from '../Fashion';
+import { Profile } from '../Profile';
 import { ElecProductsService } from './elec-products.service';
 import { MensFashionService } from './mens-fashion.service';
 import { RestService } from './rest.service';
@@ -91,9 +92,8 @@ export class CartService{
     });
   }
 
-  sendMail(){
-    alert('cart service');
-    this.restService.sendOrderPlacedMail().subscribe({
+  sendMail(profileData:Profile){
+    this.restService.sendOrderPlacedMail(profileData.name,profileData.email).subscribe({
       next : (data)=>{
         // this.getCartProductFromRestService();
         alert('Check Your mail please');

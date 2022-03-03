@@ -7,11 +7,12 @@
     (mouseout)="onImageMouseOut($event)" #productImageContainer [ngStyle]="{'height' : imgHeight+'rem' }" class="img-fluid">
     </a>
     <div class="card-body product-text">
-        <h4 class="card-title product-title">
+        <h4 class=" m-0 card-title product-title">
           <!-- <a [routerLink]="['/products', product.id]" >{{product.title}}</a> -->
           {{product.title}}
         </h4>
-        <h5 class="product-price">₹{{product.price | priceFormatter}}</h5>
+          <h5 class=" m-0 product-price">₹{{product.price | priceFormatter}}</h5>
+          <div class="col-lg-6 text-start"><i *ngFor="let i of getArray(product.stars)" class="bi bi-star-fill" ></i></div>
         <!-- <h5 class="product-price">{{product.price}} rs</h5> -->
         <p class="card-text product-description">{{product.description}}</p>
         <!-- <button

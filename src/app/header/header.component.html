@@ -28,7 +28,7 @@
             <a class="nav-link" *ngIf="!loggedin"  routerLinkActive="active"  routerLink="/register">Register</a>
           </li>
           <li *ngIf="loggedin"  class="nav-item">
-            <a class="nav-link">Orders</a>
+            <a class="nav-link" routerLinkActive="active"  routerLink="/account">Account</a>
           </li>
           <li *ngIf="loggedin"  class="nav-item">
             <a class="nav-link" routerLinkActive="active"  routerLink="/cart">Cart</a>

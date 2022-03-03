@@ -1,0 +1,35 @@
+<div class="admin">
+<div class="container-fluid">
+    <div class="row justify-content-around">
+        <div class="col-md-7 ">
+            <div class="my-orders p-5 mb-5 mt-5">
+                <h2 class="text-center">Orders</h2>
+                <table class="table text-center mt-5 table-hover">
+                    <thead class="table-dark">
+                        <tr class="fw-bold ">
+                            <td>Order ID</td>
+                            <td>customer ID</td>
+                            <td>Product ID</td>
+                            <td>quantity</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of allOrders">
+                            <td>ord_{{order.id}}</td>
+                            <td>{{order.c_id}}</td>
+                            <td>{{order.p_id}}</td>
+                            <td>{{order.p_qty}}</td>
+                            <td><select class="form-select" (input)="updateStatus(order,slct.value)" #slct aria-label="Default select example">
+                                <option [selected]="isOrderPlaced(order)" value="Placed">Placed</option>
+                                <option [selected]="isOrderShipped(order)"value="Shipped">Shipped</option>
+                                <option [selected]="isOrderDelivered(order)"value="Delivered">Delivered</option>
+                              </select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

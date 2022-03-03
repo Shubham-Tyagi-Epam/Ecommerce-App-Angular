@@ -1,0 +1,20 @@
+.admin{
+    margin-top: 5rem;
+    background-color: #F1F3F6;
+}
+.editBgImg{
+    background: url('../../assets/Images/editProfile.jfif');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position: center;
+}
+
+.editBgImg input{
+    background: transparent;color: white;
+}
+
+
+.my-orders{
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

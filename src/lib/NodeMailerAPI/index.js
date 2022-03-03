@@ -27,13 +27,13 @@ transporter.verify((err, success) => {
 app.post("/send", function (req, res) {
     let mailOptions = {
       from: "raj.tyagi2000@gmail.com",
-      to: "raj.tyagi2000@gmail.com",
-      subject: "Nodemailer API",
+      to: req.body.email,
+      subject: "Order Confirmed",
       text: "Hi from your nodemailer API",
       html: ` <h3>Hello ${req.body.name},</h3>
-      <p> Welcome to ShubhCart, We aim to give you a wonderful experience of Shopping here.</p>
-      <p> Regards <br/> 
-      CEO, ShubhCart </p>   
+      <h3> Thanks for shopping with ShubKart, We aim to give you a wonderful experience of Shopping here.</h3>
+      <h3> Regards <br/> 
+      CEO, ShubhCart </h3>   
       `
     };
    

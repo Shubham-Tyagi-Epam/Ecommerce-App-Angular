@@ -22,6 +22,11 @@ export class FilterComponent implements OnInit {
   titleSrch:string = "";
   maxPrice:number = 0;
   rangeValue:number = 3000;
+  oneStar:boolean = false;
+  twoStar:boolean = false;
+  threeStar:boolean = false;
+  fourStar:boolean = false;
+  fiveStar:boolean = false;
   ngOnInit(): void {
     this.getProductList();
     this.womenFashionService.setProducts();
@@ -156,7 +161,17 @@ export class FilterComponent implements OnInit {
     this.checkedBrands = this.checkedBrands.filter((brand)=>(brand!=removeBrandName));
   }
 
-  onChangeStarsSelectEvent(e:any){
+  onChangeStarsSelectEvent(e:any,star:string){
+    if(star == "one")
+      this.oneStar = !this.oneStar;
+    if(star == "two")
+      this.twoStar = !this.twoStar;
+    if(star == "three")
+      this.threeStar = !this.threeStar;
+    if(star == "four")
+      this.fourStar = !this.fourStar;
+    if(star == "five")
+      this.fiveStar = !this.fiveStar;
     let name = e.target.name;
     let value = e.target.checked;
     if(value){

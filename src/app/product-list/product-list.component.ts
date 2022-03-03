@@ -3,6 +3,7 @@ import { ElecProductsService } from '../services/elec-products.service';
 import { KidsFashionService } from '../services/kids-fashion.service';
 import { MensFashionService } from '../services/mens-fashion.service';
 import { WomenFashionService } from '../services/women-fashion.service';
+import 'animate.css';
 
 @Component({
   selector: 'app-product-list',

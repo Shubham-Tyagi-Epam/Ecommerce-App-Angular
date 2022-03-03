@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Customer } from '../Customer';
 import { Cart } from '../Cart';
+import { Profile } from '../Profile';
+import { Order } from '../Order';
 @Injectable({
   providedIn: 'root'
 })
@@ -64,10 +66,53 @@ export class RestService {
     return this.http.put(url,body,{'headers':header,responseType:'text'});
   }
 
-  sendOrderPlacedMail(){
+  sendOrderPlacedMail(name:string,email:string){
     let url = this.mailerBaseURL + "send";
-    let body = JSON.stringify({"name":"Shubham"});
+    let body = JSON.stringify({"name":name,"email":email});
     let header = {'content-type':'application/json'};
     return this.http.post(url,body,{'headers':header,responseType:'text'});
+  }
+
+  insertProfile(profileObj:Profile){
+    let url = this.baseURL + "insertProfile";
+    let header = {'content-type':'application/json'};
+    let body = JSON.stringify(profileObj);
+    return this.http.post(url,body,{'headers':header,responseType:'text'});
+  }
+
+  getProfileById(id:number){
+    let url = this.baseURL + "profileDetails/" + String(id);
+    return this.http.get(url);
+  }
+  
+  updateProfile(profileObj:Profile){
+    let url = this.baseURL + "updateProfile";
+    let header = {'content-type':'application/json'};
+    let body = JSON.stringify(profileObj);
+    return this.http.put(url,body,{'headers':header,responseType:'text'});
+  }
+  
+  getOrders(id:number){
+    let url = this.baseURL + "getAllCustomerOrders/" + String(id);
+    return this.http.get(url)
+  }
+  
+  insertOrder(orderObj:Order){
+    let url = this.baseURL + "insertOrder";
+    let header = {'content-type':'application/json'};
+    let body = JSON.stringify(orderObj);
+    return this.http.post(url,body,{'headers':header,responseType:'text'});
+  }
+
+  getAllOrders(){
+      let url = this.baseURL + "getAllOrders"
+      return this.http.get(url)
+  }
+
+  updateOrderStatus(orderObj:Order){
+    let url = this.baseURL + "updateOrderStatus";
+    let header = {'content-type':'application/json'};
+    let body = JSON.stringify({"id":orderObj.id,"status":orderObj.status});
+    return this.http.put(url,body,{'headers':header,responseType:'text'});
   }
 }

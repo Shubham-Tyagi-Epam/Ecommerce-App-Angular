@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-    <div *ngIf="products.length!=0; else noProducts" class="row">
+    <div *ngIf="products!=undefined; else noProducts" class="row ">
         <div [ngClass]="colValue" class="col-md-6" *ngFor="let product of products">
             <app-product [product]="product" productType="{{productType}}" [imgHeight]="imgHeight">
             </app-product>

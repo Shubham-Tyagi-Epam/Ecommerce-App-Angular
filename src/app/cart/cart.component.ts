@@ -1,10 +1,16 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Cart } from '../Cart';
 import { Electronics } from '../Electronics';
 import { Fashion } from '../Fashion';
+import { Order } from '../Order';
+import { Profile } from '../Profile';
 import { CartService } from '../services/cart.service';
 import { ElecProductsService } from '../services/elec-products.service';
 import { MensFashionService } from '../services/mens-fashion.service';
+import { OrderService } from '../services/order.service';
+import { ProfileService } from '../services/profile.service';
 import { RestService } from '../services/rest.service';
 
 @Component({
@@ -14,7 +20,7 @@ import { RestService } from '../services/rest.service';
 })
 export class CartComponent implements OnInit,DoCheck,OnDestroy {
 
-  constructor(private restService:RestService, private cartService:CartService,private elecProdService:ElecProductsService, private fashionProdService:MensFashionService) { 
+  constructor(private restService:RestService, private cartService:CartService,private elecProdService:ElecProductsService, private fashionProdService:MensFashionService, private profileService:ProfileService,private router:Router, private orderService:OrderService) { 
   
 
   }
@@ -28,6 +34,8 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
   discount:number = 0;
   deliveryCharges:number = 0;
   totalAmount:number = 0
+  profileData!:Profile;
+  orders!:Order[];
   ngOnInit(): void {
       console.log("cartProduct "  + this.cartProducts)
   }
@@ -43,7 +51,7 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
         this.calculateDeliverCharges();
         this.calculateTotalAmount();
       }
-    
+      this.profileData = this.profileService.getProfileData();
   } 
 
   ngOnDestroy(): void {
@@ -51,8 +59,21 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
   }
 
   sendMail(){
-    this.cartService.sendMail();
+    if(this.profileData.address == ""){
+      alert("Enter the Delivery Address please")
+      this.router.navigateByUrl("/account");
+    }
+    else{
+      for(let i in this.cartProducts){
+        let orderObj = new Order(1,this.cartProducts[i].c_id, this.cartProducts[i].p_id, this.cartProducts[i].p_tab, this.cartProducts[i].p_qty, "Placed");
+        this.cartService.deleteCartProduct(this.cartProducts[i]);
+        this.orderService.insertOrder(orderObj);
+      
+      }
+      this.cartService.sendMail(this.profileData);
+    }
   }
+
 
   calculateTotalAmount(){
     this.totalAmount =  this.price - this.discount - this.deliveryCharges;

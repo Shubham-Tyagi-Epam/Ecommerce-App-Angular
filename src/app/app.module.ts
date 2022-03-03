@@ -26,7 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { CartProductComponent } from './cart-product/cart-product.component';
-import { PriceDetailsComponent } from './price-details/price-details.component'
+import { PriceDetailsComponent } from './price-details/price-details.component';
+import { AccountComponent } from './account/account.component';
+import { AdminComponent } from './admin/admin.component'
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { PriceDetailsComponent } from './price-details/price-details.component'
     RegisterComponent,
     CartComponent,
     CartProductComponent,
-    PriceDetailsComponent
+    PriceDetailsComponent,
+    AccountComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -120,4 +120,13 @@ export class ProductComponent implements OnInit,OnChanges {
     // console.log("productImage container = " + this.productImageContainer.nativeElement.clientWidth)
   }
 
+  getArray(num:number){
+    let arr:number[] = [];
+    for(let i=0;i<num;i++){
+      arr.push(i);
+    }
+    return arr;
+  }
+
+
 }

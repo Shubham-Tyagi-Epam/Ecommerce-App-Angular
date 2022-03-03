@@ -488,3 +488,208 @@ app.delete("/deleteCartItem/:c_id/:p_id/:p_tab",(req,res)=>{
        } 
     );
 });
+
+// ------------------------------------------
+// Profile Table
+// ------------------------------------------
+let profileTable = sequelize.define('profileSequelize',{
+    id : {
+        primaryKey : true,
+        type : Sequelize.INTEGER
+    },
+    name : Sequelize.STRING,
+    age : Sequelize.INTEGER,
+    email : Sequelize.STRING,
+    address :Sequelize.STRING,
+    phone : Sequelize.STRING,
+
+    },{
+        timestamps : false,
+        freezeTableName : true
+    }
+);
+profileTable.sync().then(()=>{
+    console.log("Connected with the table profileSequelize");
+}).catch((err)=>{
+    console.log("Unable to create/connect with the table profileSequelize...");
+    console.log(err);
+});
+
+app.get("/profileDetails/:Id",(req,res)=>{
+    id_param = req.params.Id;
+    // cartTable.findAll({where:{id:id_param}},{raw:true}).then((data)=>{
+    //         console.log("Data is fetched succesfully");
+    //         res.status(200).send(data);
+    //     }
+    // ).catch((err)=>{
+    //     let strErr = "Unable to fetch the given record"; 
+    //     console.log(strErr);
+    //     res.status(404).send(strErr);
+    // })
+    profileTable.findByPk(id_param,{raw:true}).then((data)=>{
+        // if(data.dataValues.pwd == pwd_param)
+            res.status(200).send(data);
+    }).catch(()=>{
+        res.status(404).send("customer not registered");
+    });
+});
+
+
+
+app.post("/insertProfile",(req,res)=>{
+    id_param = req.body.id;
+    name_param = req.body.name;
+    age_param = req.body.age;
+    email_param = req.body.email;
+    address_param = req.body.address;
+    phone_param = req.body.phone;
+
+    let profileObj = profileTable.build({
+        id : id_param,
+        name : name_param,
+        age : age_param,
+        email : email_param,
+        address : address_param,
+        phone : phone_param
+    });
+    profileObj.save().then((data)=>{
+            let str = "Profile added";
+            console.log(str);
+            res.status(201).send(str);
+    }).catch((err)=>{
+        let str = "We were unable to add the profile";
+        console.log(str +err); 
+        res.status(404).send(str + err);
+    });
+});
+
+app.put("/updateProfile",(req,res)=>{  
+   
+    id_param = req.body.id;
+    name_param = req.body.name;
+    age_param = req.body.age;
+    email_param = req.body.email;
+    address_param = req.body.address;
+    phone_param = req.body.phone;
+
+    profileTable.update({
+        name : name_param,
+        age : age_param,
+        email : email_param,
+        address : address_param,
+        phone : phone_param
+    },{where:{id:id_param}}).then((data)=>{
+        let str = "Record updated succesfully";
+        console.log(str);
+        res.status(200).send(str);
+    }).catch((err)=>{
+        let str = "Record not there in the table"; 
+        console.log(str);
+        res.status(404).send(str);
+    });
+}
+);
+
+// ------------------------------------------
+// Order Table
+// ------------------------------------------
+
+let orderTable = sequelize.define('orderSequelize',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+        c_id : Sequelize.INTEGER,
+        p_id : Sequelize.INTEGER,
+        p_tab : Sequelize.STRING,
+        p_qty :Sequelize.INTEGER,
+        status : Sequelize.STRING,
+    },{
+        timestamps : false,
+        freezeTableName : true
+    }
+);
+orderTable.sync().then(()=>{
+    console.log("Connected with the table orderSequelize");
+}).catch((err)=>{
+    console.log("Unable to create/connect with the table orderSequelize...");
+    console.log(err);
+});
+
+app.get("/getAllCustomerOrders/:Id",(req,res)=>{
+    id = req.params.Id;
+    orderTable.findAll({where:{c_id:id}},{raw:true}).then((data)=>{
+            console.log("Data is fetched succesfully");
+            res.status(200).send(data);
+        }
+    ).catch((err)=>{
+        let strErr = "Unable to fetch the given record"; 
+        console.log(strErr);
+        res.status(404).send(strErr);
+    })
+});
+
+app.get("/getAllOrders",(req,res)=>{
+    orderTable.findAll({raw:true}).then((data)=>{
+            console.log("Data is fetched succesfully");
+            res.status(200).send(data);
+        }
+    ).catch((err)=>{
+        let strErr = "Unable to fetch the given record"; 
+        console.log(strErr);
+        res.status(404).send(strErr);
+    })
+});
+
+
+app.post("/insertOrder",(req,res)=>{
+    console.log("sdsd" + JSON.stringify(req.body));
+    // id_param = 0;
+    c_id_param = req.body.c_id;
+    p_id_param = req.body.p_id;
+    p_tab_param = req.body.p_tab;
+    p_qty_param = req.body.p_qty;
+    status_param = req.body.status;
+
+    let orderObj = orderTable.build({
+        // id : id_param,
+        c_id : c_id_param,
+        p_id : p_id_param,
+        p_tab : p_tab_param,
+        p_qty : p_qty_param,
+        status : status_param
+        
+    });
+    console.log("orderObj = " + p_id_param);
+    // res.status(201).send("str");
+    orderObj.save().then((data)=>{
+            let str = "Order succesfully placed";
+            console.log(str);
+            res.status(201).send(str);
+    }).catch((err)=>{
+        let str = "We were unable to place the order";
+        console.log(str +err); 
+        res.status(404).send(str + err);
+    });
+});
+
+app.put("/updateOrderStatus",(req,res)=>{  
+    
+    id_param = req.body.id;
+    status_param = req.body.status;
+
+    orderTable.update({
+        status : status_param
+    },{where:{id:id_param}}).then((data)=>{
+        let str = "Record updated succesfully";
+        console.log(str);
+        res.status(200).send(str);
+    }).catch((err)=>{
+        let str = "Record not there in the table"; 
+        console.log(str);
+        res.status(404).send(str);
+    });
+});
+
+
