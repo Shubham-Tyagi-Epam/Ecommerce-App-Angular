@@ -31,6 +31,7 @@ export class CartService{
   }
 
   getCartProductFromRestService(){
+    this.c_id = localStorage.getItem(this.varCustId);
     this.restService.getCartProd(Number(this.c_id)).subscribe({
       next : (data:any)=>{
         this.cartProducts = data;
@@ -47,6 +48,7 @@ export class CartService{
 
   insertCartProduct(p_id:number,p_tab:string){
     console.log("p_id = " + p_id);
+    this.c_id = localStorage.getItem(this.varCustId);
     let cartObj:Cart = new Cart(0,this.c_id,p_id,p_tab,1);
     
     for(let cp of this.cartProducts){

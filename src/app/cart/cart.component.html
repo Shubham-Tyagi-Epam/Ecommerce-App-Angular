@@ -1,6 +1,6 @@
 <div class="cart">
     <div class="container-fluid"></div>
-    <div *ngIf="cartProducts.length>0; else elseBlock" class="row justify-content-evenly">
+    <div *ngIf="cartProducts!=undefined && cartProducts.length>0; else elseBlock" class="row justify-content-evenly">
         <div class="col-lg-6 cart-prod">
             <div class="row">
                 <div *ngFor="let prod of cartProducts">

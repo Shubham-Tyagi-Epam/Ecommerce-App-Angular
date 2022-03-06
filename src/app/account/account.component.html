@@ -1,8 +1,8 @@
 <div class="account">
 <div class="container-fluid">
     <div class="row justify-content-around">
-        <div class="col-md-7 ">
-            <div class="my-orders p-5 mb-5 mt-5">
+        <div class="col-md-7" >
+            <div class="my-orders p-5 mb-5 mt-5" *ngIf="orders!=undefined && orders.length>0 else noOrders">
                 <h2 class="text-center">My Orders</h2>
                 <table class="table text-center mt-5 table-hover">
                     <thead class="table-dark">
@@ -25,7 +25,15 @@
                     </tbody>
                 </table>
             </div>
+            <ng-template #noOrders>
+                <div class="row justify-content-center align-items-center no-product">
+                <img src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg" style="max-height:15rem" style="margin-top:5%">
+                    
+              </div>
+            </ng-template>
+            
         </div>
+        
         <div class="col-md-4 ">
             <!-- <div *ngIf="profile" class="my-profile p-5">
                 <p >id : {{profile.id}}</p>

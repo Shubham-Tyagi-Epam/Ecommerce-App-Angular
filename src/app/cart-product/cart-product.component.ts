@@ -31,7 +31,7 @@ export class CartProductComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
    
-    console.log("Cart component ");
+    // console.log("Cart component ");
     // console.log(this.cartProduct.p_qty);
     this.images = this.product.images.split(" ");
     this.currentImage = this.images[0];
@@ -40,10 +40,12 @@ export class CartProductComponent implements OnInit,OnChanges {
   }
   
   deleteCartProduct(){
+      // console.log(this.cartProduct);
       this.cartService.deleteCartProduct(this.cartProduct);
   }
 
   updateCartProductQty(action:string){
+    console.log(this.cartProduct);
     let qty = this.cartProduct.p_qty;
     if(action == 'increase')
       qty+=1;

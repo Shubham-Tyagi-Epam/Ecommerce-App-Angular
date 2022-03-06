@@ -14,7 +14,8 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit,DoCheck {
-
+  varCustId = "custId";
+  c_id:any = localStorage.getItem(this.varCustId);
   constructor(private profileService:ProfileService,private orderService:OrderService, private fashionProdService:MensFashionService,private elecProdService:ElecProductsService) { }
   profile!:Profile;
   orders!:Order[];

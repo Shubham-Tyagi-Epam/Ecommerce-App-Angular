@@ -56,13 +56,13 @@ export class ProductComponent implements OnInit,OnChanges {
   addToCart(){
     let strUrlForRouting;
     if(this.authGuardService.canActivate()){
-      if(this.productType == "MensFashion" || this.productType == "WomenFashion" || this.productType == "idsFashion"){
+      if(this.productType == "MensFashion" || this.productType == "WomenFashion" || this.productType == "KidsFashion"){
         console.log("this.product.pid = ",this.product.id)
         this.cartService.insertCartProduct(this.product.id,"Fashion");
         // alert('Product inserted');
       }
       else{
-        this.cartService.insertCartProduct(this.product.id,"E;ectronics");
+        this.cartService.insertCartProduct(this.product.id,"Electronics");
       }
     }
     else{

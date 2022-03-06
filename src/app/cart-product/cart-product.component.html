@@ -19,12 +19,12 @@
                 <img src="../../assets/Images/plus.png" (click)="updateCartProductQty('increase')"  style="height: 1.5rem;cursor: pointer;">
             </div>
             <div class="col-md-9 align-items-center">
-                <h4 class="remove" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</h4>
+                <h4 class="remove" (click)="deleteCartProduct()">Remove</h4>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header no-border-top-bottom">
@@ -32,7 +32,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body fs-5 text-muted">
-              Are you sure you want to remove this item? 
+              Are you sure you want to remove this item? {{product.id}}
             </div>
             <div class="modal-footer no-border-top-bottom">
               <button type="button" class="btn fs-5" data-bs-dismiss="modal">Cancel</button>
@@ -40,4 +40,4 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->

@@ -36,7 +36,9 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
   totalAmount:number = 0
   profileData!:Profile;
   orders!:Order[];
+
   ngOnInit(): void {
+      this.getCartProductFromRestService();
       console.log("cartProduct "  + this.cartProducts)
   }
 
@@ -76,7 +78,7 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
 
 
   calculateTotalAmount(){
-    this.totalAmount =  this.price - this.discount - this.deliveryCharges;
+    this.totalAmount =  this.price - this.discount + this.deliveryCharges;
     if(this.totalAmount<=0){
       this.totalAmount = 0;
       this.deliveryCharges = 0;
@@ -137,9 +139,16 @@ export class CartComponent implements OnInit,DoCheck,OnDestroy {
     }
     return this.fashionProducts[0];
   }
- 
-  
-
-  
-
+  getCartProductFromRestService(){
+    this.c_id = localStorage.getItem(this.varCustId);
+    this.restService.getCartProd(Number(this.c_id)).subscribe({
+      next : (data:any)=>{
+        this.cartProducts = data;
+      },
+      error : (err)=>{
+        console.log(err);
+      }
+    });
+  }
 }
+
