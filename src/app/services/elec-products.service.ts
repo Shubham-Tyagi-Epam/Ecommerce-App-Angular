@@ -3,100 +3,106 @@ import { Electronics } from '../Electronics';
 import { RestService } from './rest.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ElecProductsService {
-
-  constructor(private restService:RestService) {
+  constructor(private restService: RestService) {
     this.getElecProduct();
-   }
-  dupProducts!:any[];
-  products!:any[];
-  allProducts!:any[];
-  checkedBrands:any[] = [];
-  lowerLimit:number = 0;
-  upperLimit:number = 0;
-  checkedStars:any[]=[];
-  titleSearch:string = "";
+  }
+  dupProducts!: any[];
+  products!: any[];
+  allProducts!: any[];
+  checkedBrands: any[] = [];
+  lowerLimit: number = 0;
+  upperLimit: number = 0;
+  checkedStars: any[] = [];
+  titleSearch: string = '';
 
-  getElecProducts(){
+  getElecProducts() {
     return this.dupProducts;
   }
-  getAllProducts(){
+  getAllProducts() {
     return this.allProducts;
   }
-  setProducts(){
+  setProducts() {
     this.dupProducts = this.products;
   }
-  getElecProduct(){
+  getElecProduct() {
     // return this.dupProducts;
-    console.log("Called again");
-    console.log("geee");
+    console.log('Called again');
+    console.log('geee');
     this.restService.getAllElectronicsProducts().subscribe({
-      next : (data:any)=>{
-        console.log("subscribe data ");
+      next: (data: any) => {
+        console.log('subscribe data ');
         console.log(data);
         this.dupProducts = data;
         this.products = data;
         this.allProducts = data;
-        this.dupProducts = this.dupProducts.filter((p)=>{
-          return p.category == "electronics";
-        })
-        this.products = this.products.filter((p)=>{
-          return p.category == "electronics";
-        })
-        console.log("products  = "  )
-        console.log(this.dupProducts)
+        this.dupProducts = this.dupProducts.filter((p) => {
+          return p.category == 'electronics';
+        });
+        this.products = this.products.filter((p) => {
+          return p.category == 'electronics';
+        });
+        console.log('products  = ');
+        console.log(this.dupProducts);
       },
-      error : (err)=>{
-          console.log("connot retrieve data : " + err.error);
-      }
+      error: (err) => {
+        console.log('connot retrieve data : ' + err.error);
+      },
     });
   }
-  prf(lower:number,higher:number){
-    if(higher != 0 && lower<higher){
-      this.dupProducts = this.dupProducts.filter((product)=>{return product.price<=higher && product.price>=lower});
+  prf(lower: number, higher: number) {
+    if (higher != 0 && lower < higher) {
+      this.dupProducts = this.dupProducts.filter((product) => {
+        return product.price <= higher && product.price >= lower;
+      });
     }
   }
-  priceRangeFilter(lower:number,higher:number){
+  priceRangeFilter(lower: number, higher: number) {
     this.lowerLimit = lower;
     this.upperLimit = higher;
     this.dupProducts = this.products;
     this.filterAll();
     // if(lower == 0 && higher == 0)
     //   this.dupProducts = this.products;
-   
   }
- bf(checkedBrands:any[]){
-  if(checkedBrands.length != 0){
-    this.dupProducts = this.dupProducts.filter((product)=>(checkedBrands.indexOf(product.brand)!=-1));
+  bf(checkedBrands: any[]) {
+    if (checkedBrands.length != 0) {
+      this.dupProducts = this.dupProducts.filter(
+        (product) => checkedBrands.indexOf(product.brand) != -1
+      );
+    }
   }
- }
-  brandsFilter(checkedBrands:any[]){
+  brandsFilter(checkedBrands: any[]) {
     this.checkedBrands = checkedBrands;
     // if(checkedBrands.length == 0)
     //   this.dupProducts = this.products;
     this.dupProducts = this.products;
     this.filterAll();
   }
-  sf(checkedStars:any[]){
-    if(checkedStars.length != 0){
-      this.dupProducts = this.dupProducts.filter((product)=>(checkedStars.indexOf(String(product.stars))!=-1));
+  sf(checkedStars: any[]) {
+    if (checkedStars.length != 0) {
+      this.dupProducts = this.dupProducts.filter(
+        (product) => checkedStars.indexOf(String(product.stars)) != -1
+      );
     }
   }
-  starsFilter(checkedStars:any[]){
+  starsFilter(checkedStars: any[]) {
     this.checkedStars = checkedStars;
     // if(checkedStars.length == 0)
     //   this.dupProducts = this.products;
     this.dupProducts = this.products;
     this.filterAll();
   }
-  tf(title:string){
-    if(title.length != 0){
-      this.dupProducts = this.dupProducts.filter((product)=>(product.title.toLowerCase().includes(title.toLowerCase())));
+  tf(title: string) {
+    if (title.length != 0) {
+      this.dupProducts = this.dupProducts.filter((product) =>
+        product.title.toLowerCase().includes(title.toLowerCase())
+      );
     }
   }
-  titleFilter(title:string){
+  titleFilter(title: string) {
     this.titleSearch = title;
     // if(title.length == 0)
     //   this.dupProducts = this.products;
@@ -104,8 +110,8 @@ export class ElecProductsService {
     this.filterAll();
   }
 
-  filterAll(){
-    this.prf(this.lowerLimit,this.upperLimit);
+  filterAll() {
+    this.prf(this.lowerLimit, this.upperLimit);
     this.bf(this.checkedBrands);
     this.sf(this.checkedStars);
     this.tf(this.titleSearch);

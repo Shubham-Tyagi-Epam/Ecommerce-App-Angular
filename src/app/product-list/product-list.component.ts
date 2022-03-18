@@ -8,36 +8,38 @@ import 'animate.css';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit,DoCheck{
-  @Input('productType') productType!:string;
-  colValue:string = 'col-lg-4';
+export class ProductListComponent implements OnInit, DoCheck {
+  @Input('productType') productType!: string;
+  colValue: string = 'col-lg-4';
   threeColActive = true;
   fourColActive = false;
-  gridValue:number = 3;
-  imgHeight:number = 23;
-  constructor(private elecProductsService:ElecProductsService,private mensFashionService:MensFashionService,private womenFashionService:WomenFashionService,private kidsFashionService:KidsFashionService) { }
+  gridValue: number = 3;
+  imgHeight: number = 23;
+  constructor(
+    private elecProductsService: ElecProductsService,
+    private mensFashionService: MensFashionService,
+    private womenFashionService: WomenFashionService,
+    private kidsFashionService: KidsFashionService
+  ) {}
 
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   ngDoCheck(): void {
-    
-    if(this.productType=="Electronics")
+    if (this.productType == 'Electronics')
       this.products = this.elecProductsService.getElecProducts();
-    else if(this.productType=="MensFashion"){
-    this.products = this.mensFashionService.getElecProducts();
-    }
-    else if(this.productType=="WomenFashion")
-    this.products = this.womenFashionService.getElecProducts();
-    else if(this.productType=="KidsFashion")
-    this.products = this.kidsFashionService.getElecProducts();
-  } 
-  
-  products:any[] = [];
+    else if (this.productType == 'MensFashion') {
+      this.products = this.mensFashionService.getElecProducts();
+    } else if (this.productType == 'WomenFashion')
+      this.products = this.womenFashionService.getElecProducts();
+    else if (this.productType == 'KidsFashion')
+      this.products = this.kidsFashionService.getElecProducts();
+  }
 
-  onChangeLayout(n:number): void {
+  products: any[] = [];
+
+  onChangeLayout(n: number): void {
     this.gridValue = n;
     if (n === 4) {
       this.colValue = `col-lg-4`;
@@ -51,7 +53,4 @@ export class ProductListComponent implements OnInit,DoCheck{
       this.imgHeight = 17;
     }
   }
-
-  
-  
 }

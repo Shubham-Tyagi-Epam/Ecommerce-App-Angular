@@ -23,12 +23,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { CartProductComponent } from './cart-product/cart-product.component';
 import { PriceDetailsComponent } from './price-details/price-details.component';
 import { AccountComponent } from './account/account.component';
-import { AdminComponent } from './admin/admin.component'
+import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -55,16 +56,17 @@ import { AdminComponent } from './admin/admin.component'
     CartProductComponent,
     PriceDetailsComponent,
     AccountComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

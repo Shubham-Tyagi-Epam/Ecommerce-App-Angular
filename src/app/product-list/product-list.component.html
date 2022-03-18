@@ -1,35 +1,57 @@
-<div class="container-fluid product-list ">
-    <div class="row mb-3">
-        <div class="col-12 d-none d-lg-block d-xl-block">
-          <div class="card  ">
-            <div class="card-header d-flex justify-content-end ">
-              <span class="mr-3">Change Layout: </span>
-              <div class="layout-mode" (click)="onChangeLayout(4)">
-                      <div [ngClass]="{'active' : threeColActive}" class="item"></div>
-                      <div [ngClass]="{'active' : threeColActive}" class="item"></div>
-                      <div [ngClass]="{'active' : threeColActive}" class="item last-item"></div>
-              </div>
-              <div [ngClass]="{'active' : fourColActive}" class="layout-mode" (click)="onChangeLayout(3)">
-                <div [ngClass]="{'active' : fourColActive}" class="item"></div>
-                <div [ngClass]="{'active' : fourColActive}" class="item"></div>
-                <div [ngClass]="{'active' : fourColActive}" class="item"></div>
-                <div [ngClass]="{'active' : fourColActive}" class="item last-item"></div>
-              </div>
-            </div>
+<div class="container-fluid product-list">
+  <div class="row mb-3">
+    <div class="col-12 d-none d-lg-block d-xl-block">
+      <div class="card animate__animated animate__fadeInDown">
+        <div class="card-header d-flex justify-content-end">
+          <span class="mr-3">Change Layout: </span>
+          <div class="layout-mode" (click)="onChangeLayout(4)">
+            <div [ngClass]="{ active: threeColActive }" class="item"></div>
+            <div [ngClass]="{ active: threeColActive }" class="item"></div>
+            <div
+              [ngClass]="{ active: threeColActive }"
+              class="item last-item"
+            ></div>
+          </div>
+          <div
+            [ngClass]="{ active: fourColActive }"
+            class="layout-mode"
+            (click)="onChangeLayout(3)"
+          >
+            <div [ngClass]="{ active: fourColActive }" class="item"></div>
+            <div [ngClass]="{ active: fourColActive }" class="item"></div>
+            <div [ngClass]="{ active: fourColActive }" class="item"></div>
+            <div
+              [ngClass]="{ active: fourColActive }"
+              class="item last-item"
+            ></div>
           </div>
         </div>
       </div>
-    <div *ngIf="products!=undefined && products.length>0; else noProducts" class="row ">
-        <div [ngClass]="colValue" class="col-md-6" *ngFor="let product of products">
-            <app-product [product]="product" productType="{{productType}}" [imgHeight]="imgHeight">
-            </app-product>
-        </div>
     </div>
-    <ng-template #noProducts>
-      <div class="row justify-content-center align-items-center no-product">
-      <img src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg" style="max-height:20rem">
-   
+  </div>
+  <div
+    *ngIf="products != undefined && products.length > 0; else noProducts"
+    class="row animate__animated animate__fadeInUp"
+  >
+    <div
+      [ngClass]="colValue"
+      class="col-md-6 mb-5 d-flex align-self-stretch position-relative"
+      *ngFor="let product of products"
+    >
+      <app-product
+        [product]="product"
+        productType="{{ productType }}"
+        [imgHeight]="imgHeight"
+      >
+      </app-product>
+    </div>
+  </div>
+  <ng-template #noProducts>
+    <div class="row justify-content-center align-items-center no-product">
+      <img
+        src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg"
+        style="max-height: 20rem"
+      />
     </div>
   </ng-template>
-
 </div>

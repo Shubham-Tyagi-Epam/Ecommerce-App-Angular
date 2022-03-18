@@ -1,26 +1,38 @@
-
-<div class="card product mb-5">
-    <a class="card-image-top product-link" (click)="routeForProduct()">
-        <img [src]="currentImage" (mousemove)="onImageChange($event)"
-        (touchmove)="onImageChange($event)"
-    (touchout)="onImageMouseOut($event)"
-    (mouseout)="onImageMouseOut($event)" #productImageContainer [ngStyle]="{'height' : imgHeight+'rem' }" class="img-fluid">
-    </a>
-    <div class="card-body product-text">
-        <h4 class=" m-0 card-title product-title">
-          <!-- <a [routerLink]="['/products', product.id]" >{{product.title}}</a> -->
-          {{product.title}}
-        </h4>
-          <h5 class=" m-0 product-price">₹{{product.price | priceFormatter}}</h5>
-          <div class="col-lg-6 text-start"><i *ngFor="let i of getArray(product.stars)" class="bi bi-star-fill" ></i></div>
-        <!-- <h5 class="product-price">{{product.price}} rs</h5> -->
-        <p class="card-text product-description">{{product.description}}</p>
-        <!-- <button
+<!-- <div class="d-flex align-self-stretch"> -->
+<div class="card product" style="height: 100%">
+  <a class="card-image-top product-link" (click)="routeForProduct()">
+    <img
+      [src]="currentImage"
+      (mousemove)="onImageChange($event)"
+      (touchmove)="onImageChange($event)"
+      (touchout)="onImageMouseOut($event)"
+      (mouseout)="onImageMouseOut($event)"
+      #productImageContainer
+      [ngStyle]="{ height: imgHeight + 'rem' }"
+      class="img-fluid"
+    />
+  </a>
+  <div
+    class="card-body product-text"
+    [ngClass]="{ 'mt-0': imgHeight == 17, 'mt-5': imgHeight == 23 }"
+  >
+    <h4 class="m-0 card-title product-title">
+      <!-- <a [routerLink]="['/products', product.id]" >{{product.title}}</a> -->
+      {{ product.title }}
+    </h4>
+    <h5 class="m-0 product-price">₹{{ product.price | priceFormatter }}</h5>
+    <div class="col-lg-6 text-start">
+      <i *ngFor="let i of getArray(product.stars)" class="bi bi-star-fill"></i>
+    </div>
+    <!-- <h5 class="product-price">{{product.price}} rs</h5> -->
+    <p class="card-text product-description">{{ product.description }}</p>
+    <!-- <button
           (click)="onAddProductToCart()"
         class="btn btn-info product__add-to-cart">Add to cart
         </button> -->
-        <button
-        class="btn btn-info product-add-to-cart" (click)="addToCart()">Add to cart
-        </button>
-      </div>
+    <button class="btn btn-info product-add-to-cart" (click)="addToCart()">
+      Add to cart
+    </button>
+  </div>
 </div>
+<!-- </div> -->
