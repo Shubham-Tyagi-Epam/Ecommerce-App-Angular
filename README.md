@@ -1,3 +1,10 @@
+# How to make this work
+
+- First of all run the index.js file in Ecommerce-App-Angular\src\lib, to run `node index.js`
+- Next move to the directory Ecommerce-App-Angular\src\lib\NodeMailerAPI and run `node index.js`
+- move to the main project directory and run the command `ng serve --open`
+- dummy login data would be username : `Ramesh` and pwd : `admin`
+
 # EcommerceWebsite
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
