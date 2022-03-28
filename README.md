@@ -5,6 +5,10 @@
 - move to the main project directory and run the command `ng serve --open`
 - dummy login data would be username : `Ramesh` and pwd : `admin`
 
+# Working video of the app
+
+- [video](https://drive.google.com/drive/folders/1JejnuGN0ZCYMEweNtNstNOlLFg_es8M-)
+
 # EcommerceWebsite
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
